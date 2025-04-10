@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class TranslationService {
@@ -40,7 +41,7 @@ public class TranslationService {
 
         Request request = requestBuilder(translate);
         try (Response response = client.newCall(request).execute()) {
-            return response.body().string();
+            return Objects.requireNonNull(response.body()).string();
         } catch (Exception e) {
             System.out.println(" Exception while translating ");
             e.getStackTrace();
